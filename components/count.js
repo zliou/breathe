@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-class Count extends React.Component {
+export default class Count extends React.Component {
   constructor() {
     super();
 

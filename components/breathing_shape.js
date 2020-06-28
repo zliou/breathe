@@ -52,9 +52,6 @@ export default class BreathingShape extends React.Component {
     }).start(this.count);
   };
 
-/*
-          <Count/>
-          */
   render() {
     return (
       <View style={styles.container}>
@@ -70,8 +67,8 @@ export default class BreathingShape extends React.Component {
           </Animated.View>
         </View>
         <View style={styles.instructionsContainer}>
-          <Text>Hello!</Text>
           <Instructions hl='zh'/>
+          <Count/>
         </View>
       </View>
     );
