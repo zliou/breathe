@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { Animated, Button, StyleSheet, Text, View } from 'react-native';
 
 import Count from './count.js';
 import Instructions from './instructions.js';
@@ -70,6 +70,12 @@ export default class BreathingShape extends React.Component {
           <Instructions hl='zh'/>
           <Count/>
         </View>
+        <View style={styles.buttonRow}>
+          <Button
+              accessibilityLabel="Select language"
+              color="#eeeeee"
+              title=" &#127760; "/>
+        </View>
       </View>
     );
   }
@@ -106,6 +112,6 @@ const styles = StyleSheet.create({
   },
   buttonRow: {
     flexDirection: "row",
-    marginVertical: 16
+    paddingTop: 50,
   },
 });
