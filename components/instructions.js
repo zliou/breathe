@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
+import I18nLibrary from './i18n_library.js';
+
 export default class Instructions extends React.Component {
   constructor(props) {
     super(props);
-    let i18n = new I18n();
+    let i18n = new I18nLibrary();
     let library = i18n.getLibrary();
     this.state = {
       currentInstruction: 0,

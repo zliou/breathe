@@ -53,7 +53,6 @@ export default class BreathingShape extends React.Component {
   };
 
 /*
-          <Instructions hl='zh'/>
           <Count/>
           */
   render() {
@@ -72,6 +71,7 @@ export default class BreathingShape extends React.Component {
         </View>
         <View style={styles.instructionsContainer}>
           <Text>Hello!</Text>
+          <Instructions hl='zh'/>
         </View>
       </View>
     );
