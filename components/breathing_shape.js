@@ -1,70 +1,81 @@
 import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import { Count } from './count.js';
-import { Instructions } from './instructions.js';
+import Count from './count.js';
+import Instructions from './instructions.js';
 
-export default function BreathingShape() {
-  let INHALE_DURATION_MS = 4000;
-  let HOLD_IN_DURATION_MS = 4000;
-  let EXHALE_DURATION_MS = 4000;
-  let HOLD_OUT_DURATION_MS = 4000;
+const INHALE_DURATION_MS = 4000;
+const HOLD_IN_DURATION_MS = 4000;
+const EXHALE_DURATION_MS = 4000;
+const HOLD_OUT_DURATION_MS = 4000;
 
-  let INHALED_SIZE = 240;
-  let EXHALED_SIZE = 50;
+const INHALED_SIZE = 240;
+const EXHALED_SIZE = 50;
 
-  const resizeAnim = React.useRef(new Animated.Value(EXHALED_SIZE)).current;
-  const grow = () => {
-    Animated.timing(resizeAnim, {
+export default class BreathingShape extends React.Component {
+  state = {
+    resizeAnim: new Animated.Value(EXHALED_SIZE),
+    countAnim: new Animated.Value(0),
+  }
+
+  constructor() {
+    super();
+    // Start the animation.
+    this.growNoDelay();
+  }
+
+  grow = () => {
+    Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       delay: HOLD_OUT_DURATION_MS,
       duration: INHALE_DURATION_MS,
-    }).start(shrink);
+    }).start(this.shrink);
   };
-  const shrink = () => {
-    Animated.timing(resizeAnim, {
+  shrink = () => {
+    Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
       delay: HOLD_IN_DURATION_MS,
       duration: EXHALE_DURATION_MS,
-    }).start(grow);
+    }).start(this.grow);
   };
-  const growNoDelay = () => {
-    Animated.timing(resizeAnim, {
+  growNoDelay = () => {
+    Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
-    }).start(shrink);
+    }).start(this.shrink);
   };
 
-  const countAnim = React.useRef(new Animated.Value(0)).current;
-  const count = () => {
-    Animated.timing(countAnim, {
+  count = () => {
+    Animated.timing(this.state.countAnim, {
       toValue: 4,
       duration: INHALE_DURATION_MS,
-    }).start(count);
+    }).start(this.count);
   };
 
-  // Start the animation.
-  growNoDelay();
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.circle}>
-        <Animated.View
-          style={[
-            styles.breathingSquare, {
-              height: resizeAnim,
-              width: resizeAnim,
-            }
-          ]}
-        >
-        </Animated.View>
+/*
+          <Instructions hl='zh'/>
+          <Count/>
+          */
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.circle}>
+          <Animated.View
+            style={[
+              styles.breathingSquare, {
+                height: this.state.resizeAnim,
+                width: this.state.resizeAnim,
+              }
+            ]}
+          >
+          </Animated.View>
+        </View>
+        <View style={styles.instructionsContainer}>
+          <Text>Hello!</Text>
+        </View>
       </View>
-      <View style={styles.instructionsContainer}>
-        <Instructions hl='zh'/>
-        <Count/>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
