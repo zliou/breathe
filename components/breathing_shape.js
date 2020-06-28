@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Animated, Button, StyleSheet, Text, View } from 'react-native';
+import { Animated, Button, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import Modal from 'modal-enhanced-react-native-web';
 
 import Count from './count.js';
 import Instructions from './instructions.js';
@@ -14,6 +15,7 @@ const EXHALED_SIZE = 50;
 
 export default class BreathingShape extends React.Component {
   state = {
+    i18nModalVisible: false,
     resizeAnim: new Animated.Value(EXHALED_SIZE),
     countAnim: new Animated.Value(0),
   }
@@ -52,6 +54,10 @@ export default class BreathingShape extends React.Component {
     }).start(this.count);
   };
 
+  toggleI18nModal= () => {
+    this.setState({ i18nModalVisible: !this.state.i18nModalVisible});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -74,7 +80,17 @@ export default class BreathingShape extends React.Component {
           <Button
               accessibilityLabel="Select language"
               color="#eeeeee"
+              onPress={this.toggleI18nModal}
               title=" &#127760; "/>
+        </View>
+        <View>
+          <Modal isVisible={this.state.i18nModalVisible}>
+            <TouchableHighlight
+                style={styles.closeI18nModal}
+                onPress={this.toggleI18nModal}>
+              <Text style={styles.closeI18nModalText}>Close</Text>
+            </TouchableHighlight>
+          </Modal>
         </View>
       </View>
     );
@@ -89,6 +105,13 @@ const styles = StyleSheet.create({
     height: 360,
     justifyContent: "center",
     width: 360,
+  },
+  closeI18nModal: {
+    height: 50,
+    width: 50,
+  },
+  closeI18nModalText: {
+    color: "white",
   },
   container: {
     flex: 1,
