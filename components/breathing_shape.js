@@ -30,6 +30,7 @@ export default class BreathingShape extends React.Component {
   }
 
   grow = () => {
+    console.log(Date.now() + " hold-grow start");
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       delay: HOLD_OUT_DURATION_MS,
@@ -37,6 +38,7 @@ export default class BreathingShape extends React.Component {
     }).start(this.shrink);
   };
   shrink = () => {
+    console.log(Date.now() + " hold-shrink start");
     Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
       delay: HOLD_IN_DURATION_MS,
@@ -72,15 +74,15 @@ export default class BreathingShape extends React.Component {
     let i18n_library = new I18nLibrary().getLibrary();
     let hl_map = i18n_library.hlToLanguage;
     let buttons = Object.keys(hl_map).map((hl) => {
-          return (
-            <View style={styles.languageButtonContainer}>
-              <Button
-                  key={hl}
-                  title={hl_map[hl]}
-                  onPress={() => this.setLanguage(hl)}/>
-            </View>
-          );
-        });
+        return (
+          <View style={styles.languageButtonContainer}>
+            <Button
+                key={hl}
+                title={hl_map[hl]}
+                onPress={() => this.setLanguage(hl)}/>
+          </View>
+        );
+    });
 
     return (
       <View>{ buttons }</View>
