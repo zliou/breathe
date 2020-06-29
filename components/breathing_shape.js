@@ -8,7 +8,8 @@ import I18nLibrary from './i18n_library.js';
 
 const INHALE_DURATION_MS = 4000;
 const HOLD_IN_DURATION_MS = 4000;
-const EXHALE_DURATION_MS = 4000; const HOLD_OUT_DURATION_MS = 4000;
+const EXHALE_DURATION_MS = 4000;
+const HOLD_OUT_DURATION_MS = 4000;
 
 const INHALED_SIZE = 240;
 const EXHALED_SIZE = 50;
@@ -61,11 +62,9 @@ export default class BreathingShape extends React.Component {
   }
 
   setLanguage = (lang) => {
-    console.log(lang);
     this.setState({
       hl: lang,
     });
-    console.log(this.state);
   }
 
   temp() {
@@ -73,10 +72,12 @@ export default class BreathingShape extends React.Component {
     let hl_map = i18n_library.hlToLanguage;
     let buttons = Object.keys(hl_map).map((hl) => {
           return (
-            <Button
-                key={hl}
-                title={hl_map[hl]}
-                onPress={() => this.setLanguage(hl)}/>
+            <View style={styles.languageButtonContainer}>
+              <Button
+                  key={hl}
+                  title={hl_map[hl]}
+                  onPress={() => this.setLanguage(hl)}/>
+            </View>
           );
         });
 
@@ -126,6 +127,21 @@ export default class BreathingShape extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  breathingSquare: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: "powderblue",
+    justifyContent: "center",
+  },
+  breatheText: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    paddingTop: 50,
+  },
   circle: {
     alignItems: "center",
     backgroundColor: '#333333',
@@ -147,23 +163,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  breathingSquare: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: "powderblue",
-    justifyContent: "center",
-  },
-  breatheText: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10,
-  },
   instructionsContainer: {
     padding: 15,
     alignItems: "center",
   },
-  buttonRow: {
-    flexDirection: "row",
-    paddingTop: 50,
+  languageButtonContainer: {
+    paddingTop: 10,
   },
 });

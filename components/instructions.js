@@ -7,16 +7,16 @@ export default class Instructions extends React.Component {
   constructor(props) {
     super(props);
     let i18n = new I18nLibrary();
-    let library = i18n.getLibrary();
+    this.library = i18n.getLibrary();
     this.state = {
       currentInstruction: 0,
+      instructions: [
+        this.library.inhale[props.hl],
+        this.library.hold[props.hl],
+        this.library.exhale[props.hl],
+        this.library.hold[props.hl],
+      ],
     };
-    this.instructions = [
-      library.inhale[props.hl],
-      library.hold[props.hl],
-      library.exhale[props.hl],
-      library.hold[props.hl],
-    ];
   }
   
   componentDidMount() {
@@ -26,6 +26,23 @@ export default class Instructions extends React.Component {
     }, 4000);
   }
   
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.hl != this.props.hl) {
+      this.updateLanguage(nextProps.hl);
+    }
+  }
+
+  updateLanguage = (hl) => {
+    this.setState({
+      instructions: [
+        this.library.inhale[hl],
+        this.library.hold[hl],
+        this.library.exhale[hl],
+        this.library.hold[hl],
+      ],
+    });
+  }
+  
   componentWillUnmount() {
     clearInterval(this.timer);
   }
@@ -33,14 +50,14 @@ export default class Instructions extends React.Component {
   count() {
     this.setState({
       currentInstruction: (
-          this.state.currentInstruction + 1) % this.instructions.length
+          this.state.currentInstruction + 1) % this.state.instructions.length
     })
   }
 
   render() {
     return (
       <View>
-        <Text>{this.instructions[this.state.currentInstruction]}</Text>
+        <Text>{this.state.instructions[this.state.currentInstruction]}</Text>
       </View>
     );
   } 
