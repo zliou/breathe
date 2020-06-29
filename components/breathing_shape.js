@@ -4,6 +4,7 @@ import Modal from 'modal-enhanced-react-native-web';
 
 import Count from './count.js';
 import Instructions from './instructions.js';
+import I18nLibrary from './i18n_library.js'; 
 
 const INHALE_DURATION_MS = 4000;
 const HOLD_IN_DURATION_MS = 4000;
@@ -14,6 +15,7 @@ const EXHALED_SIZE = 50;
 
 export default class BreathingShape extends React.Component {
   state = {
+    hl: "en",
     i18nModalVisible: false,
     resizeAnim: new Animated.Value(EXHALED_SIZE),
     countAnim: new Animated.Value(0),
@@ -23,6 +25,7 @@ export default class BreathingShape extends React.Component {
     super();
     // Start the animation.
     this.growNoDelay();
+    this.temp = this.temp.bind(this);
   }
 
   grow = () => {
@@ -57,6 +60,31 @@ export default class BreathingShape extends React.Component {
     this.setState({ i18nModalVisible: !this.state.i18nModalVisible});
   }
 
+  setLanguage = (lang) => {
+    console.log(lang);
+    this.setState({
+      hl: lang,
+    });
+    console.log(this.state);
+  }
+
+  temp() {
+    let i18n_library = new I18nLibrary().getLibrary();
+    let hl_map = i18n_library.hlToLanguage;
+    let buttons = Object.keys(hl_map).map((hl) => {
+          return (
+            <Button
+                key={hl}
+                title={hl_map[hl]}
+                onPress={() => this.setLanguage(hl)}/>
+          );
+        });
+
+    return (
+      <View>{ buttons }</View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -72,7 +100,7 @@ export default class BreathingShape extends React.Component {
           </Animated.View>
         </View>
         <View style={styles.instructionsContainer}>
-          <Instructions hl='zh'/>
+          <Instructions hl={this.state.hl}/>
           <Count/>
         </View>
         <View style={styles.buttonRow}>
@@ -89,6 +117,7 @@ export default class BreathingShape extends React.Component {
                 onPress={this.toggleI18nModal}>
               <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
+            {this.temp()}
           </Modal>
         </View>
       </View>

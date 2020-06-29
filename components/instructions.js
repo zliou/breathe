@@ -10,7 +10,6 @@ export default class Instructions extends React.Component {
     let library = i18n.getLibrary();
     this.state = {
       currentInstruction: 0,
-      hl: props.hl,
     };
     this.instructions = [
       library.inhale[props.hl],
