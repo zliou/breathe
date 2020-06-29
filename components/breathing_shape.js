@@ -7,8 +7,7 @@ import Instructions from './instructions.js';
 
 const INHALE_DURATION_MS = 4000;
 const HOLD_IN_DURATION_MS = 4000;
-const EXHALE_DURATION_MS = 4000;
-const HOLD_OUT_DURATION_MS = 4000;
+const EXHALE_DURATION_MS = 4000; const HOLD_OUT_DURATION_MS = 4000;
 
 const INHALED_SIZE = 240;
 const EXHALED_SIZE = 50;
@@ -88,7 +87,7 @@ export default class BreathingShape extends React.Component {
             <TouchableHighlight
                 style={styles.closeI18nModal}
                 onPress={this.toggleI18nModal}>
-              <Text style={styles.closeI18nModalText}>Close</Text>
+              <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
           </Modal>
         </View>
@@ -107,11 +106,12 @@ const styles = StyleSheet.create({
     width: 360,
   },
   closeI18nModal: {
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 30,
   },
   closeI18nModalText: {
     color: "white",
+    fontSize: 30,
   },
   container: {
     flex: 1,
