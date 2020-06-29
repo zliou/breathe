@@ -65,6 +65,7 @@ export default class BreathingShape extends React.Component {
     this.setState({
       hl: lang,
     });
+    this.toggleI18nModal();
   }
 
   temp() {
