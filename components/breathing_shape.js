@@ -19,7 +19,6 @@ export default class BreathingShape extends React.Component {
     hl: "en",
     i18nModalVisible: false,
     resizeAnim: new Animated.Value(EXHALED_SIZE),
-    countAnim: new Animated.Value(0),
   }
 
   constructor() {
