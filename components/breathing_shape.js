@@ -11,7 +11,7 @@ const HOLD_IN_DURATION_MS = 4000;
 const EXHALE_DURATION_MS = 4000;
 const HOLD_OUT_DURATION_MS = 4000;
 
-const INHALED_SIZE = 240;
+const INHALED_SIZE = 260;
 const EXHALED_SIZE = 50;
 
 export default class BreathingShape extends React.Component {
@@ -112,7 +112,7 @@ export default class BreathingShape extends React.Component {
               accessibilityLabel="Select language"
               color="#eeeeee"
               onPress={this.toggleI18nModal}
-              title=" &#127760; "/>
+              title=" &#127760;  "/>
         </View>
         <View>
           <Modal isVisible={this.state.i18nModalVisible}>
@@ -131,10 +131,11 @@ export default class BreathingShape extends React.Component {
 
 const styles = StyleSheet.create({
   breathingSquare: {
+    backgroundColor: "#86c06c",
+    borderRadius: 15,
+    justifyContent: "center",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: "powderblue",
-    justifyContent: "center",
   },
   breatheText: {
     fontSize: 20,
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   },
   circle: {
     alignItems: "center",
-    backgroundColor: '#333333',
+    backgroundColor: 'black',
     borderRadius: 180,
     height: 360,
     justifyContent: "center",

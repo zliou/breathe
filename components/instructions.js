@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import I18nLibrary from './i18n_library.js';
 
@@ -57,8 +57,14 @@ export default class Instructions extends React.Component {
   render() {
     return (
       <View>
-        <Text>{this.state.instructions[this.state.currentInstruction]}</Text>
+        <Text style={styles.instructionText}>{this.state.instructions[this.state.currentInstruction]}</Text>
       </View>
     );
   } 
 }
+
+const styles = StyleSheet.create({
+  instructionText: {
+    color: "white",
+  },
+});

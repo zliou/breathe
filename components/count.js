@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class Count extends React.Component {
   constructor() {
@@ -33,8 +33,14 @@ export default class Count extends React.Component {
   render() {
     return (
       <View>
-        <Text>{this.state.count}</Text>
+        <Text style={styles.countText}>{this.state.count}</Text>
       </View>
     );
   } 
 }
+
+const styles = StyleSheet.create({
+  countText: {
+    color: "white",
+  },
+});
