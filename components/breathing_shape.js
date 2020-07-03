@@ -74,9 +74,9 @@ export default class BreathingShape extends React.Component {
     let hl_map = i18n_library.hlToLanguage;
     let buttons = Object.keys(hl_map).map((hl) => {
         return (
-          <View style={styles.languageButtonContainer}>
+          <View key={hl} style={styles.languageButtonContainer}>
             <Button
-                key={hl}
+                key={hl_map[hl]}
                 title={hl_map[hl]}
                 onPress={() => this.setLanguage(hl)}/>
           </View>
