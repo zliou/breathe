@@ -26,7 +26,6 @@ export default class BreathingShape extends React.Component {
     super();
     // Start the animation.
     this.growNoDelay();
-    this.temp = this.temp.bind(this);
   }
 
   grow = () => {
@@ -71,7 +70,7 @@ export default class BreathingShape extends React.Component {
     this.toggleI18nModal();
   }
 
-  renderI18nButton() {
+  renderI18nButton = () => {
     let i18n_library = new I18nLibrary().getLibrary();
     let hl_map = i18n_library.hlToLanguage;
     let buttons = Object.keys(hl_map).map((hl) => {
