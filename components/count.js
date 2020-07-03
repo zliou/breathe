@@ -12,7 +12,7 @@ export default class Count extends React.Component {
   componentDidMount() {
     this.timer = setInterval(() => {
       this.count();
-    }, 1001);
+    }, 1000);
   }
   
   componentWillUnmount() {
@@ -27,7 +27,6 @@ export default class Count extends React.Component {
       this.setState({
         count: 1
       })
-      console.log(Date.now() + " count reset");
     } 
   }
 

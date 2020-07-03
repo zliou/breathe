@@ -30,33 +30,34 @@ export default class BreathingShape extends React.Component {
   }
 
   grow = () => {
-    console.log(Date.now() + " hold-grow start");
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
-      delay: HOLD_OUT_DURATION_MS,
       duration: INHALE_DURATION_MS,
-    }).start(this.shrink);
+    }).start(this.holdInhaled);
   };
   shrink = () => {
-    console.log(Date.now() + " hold-shrink start");
     Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
-      delay: HOLD_IN_DURATION_MS,
+      duration: EXHALE_DURATION_MS,
+    }).start(this.holdExhaled);
+  };
+  holdExhaled = () => {
+    Animated.timing(this.state.resizeAnim, {
+      toValue: EXHALED_SIZE,
       duration: EXHALE_DURATION_MS,
     }).start(this.grow);
+  };
+  holdInhaled = () => {
+    Animated.timing(this.state.resizeAnim, {
+      toValue: INHALED_SIZE,
+      duration: INHALE_DURATION_MS,
+    }).start(this.shrink);
   };
   growNoDelay = () => {
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
-    }).start(this.shrink);
-  };
-
-  count = () => {
-    Animated.timing(this.state.countAnim, {
-      toValue: 4,
-      duration: INHALE_DURATION_MS,
-    }).start(this.count);
+    }).start(this.holdInhaled);
   };
 
   toggleI18nModal= () => {
@@ -70,7 +71,7 @@ export default class BreathingShape extends React.Component {
     this.toggleI18nModal();
   }
 
-  temp() {
+  renderI18nButton() {
     let i18n_library = new I18nLibrary().getLibrary();
     let hl_map = i18n_library.hlToLanguage;
     let buttons = Object.keys(hl_map).map((hl) => {
@@ -121,7 +122,7 @@ export default class BreathingShape extends React.Component {
                 onPress={this.toggleI18nModal}>
               <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
-            {this.temp()}
+            {this.renderI18nButton()}
           </Modal>
         </View>
       </View>

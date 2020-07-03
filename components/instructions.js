@@ -23,8 +23,7 @@ export default class Instructions extends React.Component {
     // This implementation is a hard-code of 4-second square breathing.
     this.timer = setInterval(() => {
       this.count();
-      console.log(Date.now() + " instruction change");
-    }, 4004);
+    }, 4000);
   }
   
   componentWillReceiveProps(nextProps) {
