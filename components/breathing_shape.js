@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Animated, Button, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import Modal from 'modal-enhanced-react-native-web';
 
 import Count from './count.js';
 import Instructions from './instructions.js';
@@ -13,6 +12,8 @@ const HOLD_OUT_DURATION_MS = 4000;
 
 const INHALED_SIZE = 260;
 const EXHALED_SIZE = 50;
+
+const THEME_COLOR_PRIMARY_HEX = "#86c06c";
 
 export default class BreathingShape extends React.Component {
   state = {
@@ -77,6 +78,7 @@ export default class BreathingShape extends React.Component {
           <View key={hl} style={styles.languageButtonContainer}>
             <Button
                 key={hl_map[hl]}
+                color={THEME_COLOR_PRIMARY_HEX}
                 title={hl_map[hl]}
                 onPress={() => this.setLanguage(hl)}/>
           </View>
@@ -113,16 +115,16 @@ export default class BreathingShape extends React.Component {
               onPress={this.toggleI18nModal}
               title=" &#127760;  "/>
         </View>
-        <View>
-          <Modal isVisible={this.state.i18nModalVisible}>
+        { this.state.i18nModalVisible &&
+          <View style={styles.i18nModal}>
             <TouchableHighlight
                 style={styles.closeI18nModal}
                 onPress={this.toggleI18nModal}>
               <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
             {this.renderI18nButton()}
-          </Modal>
-        </View>
+          </View>
+        }
       </View>
     );
   }
@@ -130,7 +132,7 @@ export default class BreathingShape extends React.Component {
 
 const styles = StyleSheet.create({
   breathingSquare: {
-    backgroundColor: "#86c06c",
+    backgroundColor: THEME_COLOR_PRIMARY_HEX,
     borderRadius: 15,
     justifyContent: "center",
     paddingVertical: 8,
@@ -165,6 +167,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  i18nModal: {
+    ...StyleSheet.absoluteFillObject,
+    top: 100,
+    left: 0,
+    right: 0,
+    bottom: 'auto',
+    padding: 10,
+    paddingBottom: 40,
+    borderRadius: 5,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   instructionsContainer: {
     padding: 15,
