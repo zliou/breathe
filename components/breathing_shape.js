@@ -29,30 +29,35 @@ export default class BreathingShape extends React.Component {
   }
 
   grow = () => {
+    this.setState({instruction: "Inhale"});
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
     }).start(this.holdInhaled);
   };
   shrink = () => {
+    this.setState({instruction: "Exhale"});
     Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
       duration: EXHALE_DURATION_MS,
     }).start(this.holdExhaled);
   };
   holdExhaled = () => {
+    this.setState({instruction: "Hold (out)"});
     Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
       duration: EXHALE_DURATION_MS,
     }).start(this.grow);
   };
   holdInhaled = () => {
+    this.setState({instruction: "Hold (in)"});
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
     }).start(this.shrink);
   };
   growNoDelay = () => {
+    this.state.instruction = "Inhale";
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
@@ -107,6 +112,7 @@ export default class BreathingShape extends React.Component {
         <View style={styles.instructionsContainer}>
           <Instructions hl={this.state.hl}/>
           <Count/>
+          <Text>{this.state.instruction}</Text>
         </View>
         <View style={styles.buttonRow}>
           <Button
