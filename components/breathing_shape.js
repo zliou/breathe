@@ -20,6 +20,7 @@ export default class BreathingShape extends React.Component {
     hl: "en",
     i18nModalVisible: false,
     resizeAnim: new Animated.Value(EXHALED_SIZE),
+    rotation: new Animated.Value(0),
   }
 
   constructor() {
@@ -44,16 +45,16 @@ export default class BreathingShape extends React.Component {
   };
   holdExhaled = () => {
     this.setState({instruction: "Hold (out)"});
-    Animated.timing(this.state.resizeAnim, {
-      toValue: EXHALED_SIZE,
+    Animated.timing(this.state.rotation, {
+      toValue: 0,
       duration: EXHALE_DURATION_MS,
     }).start(this.grow);
   };
   holdInhaled = () => {
     this.setState({instruction: "Hold (in)"});
-    Animated.timing(this.state.resizeAnim, {
-      toValue: INHALED_SIZE,
-      duration: INHALE_DURATION_MS,
+    Animated.timing(this.state.rotation, {
+      toValue: 1,
+      duration: EXHALE_DURATION_MS,
     }).start(this.shrink);
   };
   growNoDelay = () => {
@@ -96,6 +97,10 @@ export default class BreathingShape extends React.Component {
   }
 
   render() {
+    const spin = this.state.rotation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '90deg']
+    });
     return (
       <View style={styles.container}>
         <View style={styles.circle}>
@@ -104,6 +109,7 @@ export default class BreathingShape extends React.Component {
               styles.breathingSquare, {
                 height: this.state.resizeAnim,
                 width: this.state.resizeAnim,
+                transform: [{ rotate: spin }],
               }
             ]}
           >
