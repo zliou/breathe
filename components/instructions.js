@@ -9,40 +9,23 @@ export default class Instructions extends React.Component {
     let i18n = new I18nLibrary();
     this.library = i18n.getLibrary();
     this.state = {
-      currentInstruction: 0,
-      instructions: [
-        this.library.inhale[props.hl],
-        this.library.hold[props.hl],
-        this.library.exhale[props.hl],
-        this.library.hold[props.hl],
-      ],
+      instruction: this.library[props.instruction][props.hl],
     };
   }
   
-  componentDidMount() {
-    // This implementation is a hard-code of 4-second square breathing.
-    this.timer = setInterval(() => {
-      this.count();
-    }, 4000);
-  }
-  
   componentWillReceiveProps(nextProps) {
-    if (nextProps.hl != this.props.hl) {
-      this.updateLanguage(nextProps.hl);
+    if (nextProps.hl != this.props.hl ||
+        nextProps.instruction != this.props.instruction) {
+      this.updateInstruction(nextProps.instruction, nextProps.hl);
     }
   }
 
-  updateLanguage = (hl) => {
+  updateInstruction = (instruction, hl) => {
     this.setState({
-      instructions: [
-        this.library.inhale[hl],
-        this.library.hold[hl],
-        this.library.exhale[hl],
-        this.library.hold[hl],
-      ],
+      instruction: this.library[instruction][hl],
     });
   }
-  
+
   componentWillUnmount() {
     clearInterval(this.timer);
   }
@@ -57,7 +40,7 @@ export default class Instructions extends React.Component {
   render() {
     return (
       <View>
-        <Text style={styles.instructionText}>{this.state.instructions[this.state.currentInstruction]}</Text>
+        <Text style={styles.instructionText}>{this.state.instruction}</Text>
       </View>
     );
   } 

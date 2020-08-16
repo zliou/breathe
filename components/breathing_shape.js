@@ -30,35 +30,35 @@ export default class BreathingShape extends React.Component {
   }
 
   grow = () => {
-    this.setState({instruction: "Inhale"});
+    this.setState({instruction: "inhale"});
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
     }).start(this.holdInhaled);
   };
   shrink = () => {
-    this.setState({instruction: "Exhale"});
+    this.setState({instruction: "exhale"});
     Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
       duration: EXHALE_DURATION_MS,
     }).start(this.holdExhaled);
   };
   holdExhaled = () => {
-    this.setState({instruction: "Hold (out)"});
+    this.setState({instruction: "hold"});
     Animated.timing(this.state.rotation, {
       toValue: 0,
       duration: EXHALE_DURATION_MS,
     }).start(this.grow);
   };
   holdInhaled = () => {
-    this.setState({instruction: "Hold (in)"});
+    this.setState({instruction: "hold"});
     Animated.timing(this.state.rotation, {
       toValue: 1,
       duration: EXHALE_DURATION_MS,
     }).start(this.shrink);
   };
   growNoDelay = () => {
-    this.state.instruction = "Inhale";
+    this.state.instruction = "inhale";
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
       duration: INHALE_DURATION_MS,
@@ -116,9 +116,9 @@ export default class BreathingShape extends React.Component {
           </Animated.View>
         </View>
         <View style={styles.instructionsContainer}>
-          <Instructions hl={this.state.hl}/>
-          <Count/>
-          <Text>{this.state.instruction}</Text>
+          <Instructions
+              hl={this.state.hl}
+              instruction={this.state.instruction}/>
         </View>
         <View style={styles.buttonRow}>
           <Button
