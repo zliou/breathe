@@ -7,7 +7,7 @@ export const DARK_THEME_BACKGROUND = "#121212";
 export const DARK_THEME_CIRCLE = "#333333";
 
 export const LIGHT_THEME_BACKGROUND = "#dddddd";
-export const LIGHT_THEME_CIRCLE = "#ffffff";
+export const LIGHT_THEME_CIRCLE = "#cccccc";
 
 export function setBackground(theme) {
   let background = {
@@ -16,7 +16,7 @@ export function setBackground(theme) {
     justifyContent: "center",
     width: "100%",
     height: "100%",
-    backgroundColor: "#121212",
+    backgroundColor: DARK_THEME_BACKGROUND,
   };
   // Set to light theme.
   if (theme == "dark") {
@@ -24,7 +24,7 @@ export function setBackground(theme) {
   } else {  // Set to dark theme otherwise.
     return {
       ...background,
-      backgroundColor: "#ffffff",
+      backgroundColor: LIGHT_THEME_BACKGROUND,
     };
   }
 }
@@ -32,7 +32,7 @@ export function setBackground(theme) {
 export function setCircle(theme) {
   let circle = {
     alignItems: "center",
-    backgroundColor: '#333333',
+    backgroundColor: DARK_THEME_CIRCLE,
     borderRadius: 180,
     height: 360,
     justifyContent: "center",
@@ -43,7 +43,7 @@ export function setCircle(theme) {
   } else { 
     return {
       ...circle,
-      backgroundColor: "#dddddd",
+      backgroundColor: LIGHT_THEME_CIRCLE,
     };
   }
 }
