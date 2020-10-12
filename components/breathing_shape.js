@@ -5,6 +5,8 @@ import Count from './count.js';
 import Instructions from './instructions.js';
 import I18nLibrary from './i18n_library.js'; 
 
+import * as theme from '../theme.js';
+
 const INHALE_DURATION_MS = 4000;
 const HOLD_IN_DURATION_MS = 4000;
 const EXHALE_DURATION_MS = 4000;
@@ -111,61 +113,14 @@ export default class BreathingShape extends React.Component {
     }
   }
 
-  setBackground = () => {
-    let background = {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      width: "100%",
-      height: "100%",
-      backgroundColor: "#121212",
-    };
-    // Set to light theme.
-    if (this.state.theme == "dark") {
-      return background;
-    } else {  // Set to dark theme otherwise.
-      return {
-        ...background,
-        backgroundColor: "#ffffff",
-      };
-    }
-  }
-
-  setCircle = () => {
-    let circle = {
-      alignItems: "center",
-      backgroundColor: '#333333',
-      borderRadius: 180,
-      height: 360,
-      justifyContent: "center",
-      width: 360,
-    }
-    if (this.state.theme == "dark") {
-      return circle;
-    } else { 
-      return {
-        ...circle,
-        backgroundColor: "#dddddd",
-      };
-    }
-  }
-
-  setInstructionsTextColor = () => {
-    if (this.state.theme == "dark") {
-      return "#eeeeee";
-    } else { 
-      return "#000000";
-    }
-  }
-
   render() {
     const spin = this.state.rotation.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '90deg']
     });
     return (
-      <View style={this.setBackground()}>
-        <View style={this.setCircle()}>
+      <View style={theme.setBackground(this.state.theme)}>
+        <View style={theme.setCircle(this.state.theme)}>
           <Animated.View
             style={[
               styles.breathingSquare, {
@@ -181,7 +136,7 @@ export default class BreathingShape extends React.Component {
           <Instructions
               hl={this.state.hl}
               instruction={this.state.instruction}
-              textColor={this.setInstructionsTextColor()}/>
+              textColor={theme.setInstructionsTextColor(this.state.theme)}/>
         </View>
         <View style={styles.buttonRow}>
           <Button
@@ -193,7 +148,7 @@ export default class BreathingShape extends React.Component {
               accessibilityLabel="Update color theme"
               color="#eeeeee"
               onPress={this.testTheme}
-              title="Test"/>
+              title="Theme"/>
         </View>
         { this.state.i18nModalVisible &&
           <View style={styles.i18nModal}>
