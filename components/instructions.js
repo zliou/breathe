@@ -10,6 +10,7 @@ export default class Instructions extends React.Component {
     this.library = i18n.getLibrary();
     this.state = {
       instruction: this.library[props.instruction][props.hl],
+      textColor: props.textColor,
     };
   }
   
@@ -17,6 +18,11 @@ export default class Instructions extends React.Component {
     if (nextProps.hl != this.props.hl ||
         nextProps.instruction != this.props.instruction) {
       this.updateInstruction(nextProps.instruction, nextProps.hl);
+    }
+    if (nextProps.textColor != this.props.textColor) {
+      this.setState({
+        textColor: nextProps.textColor,
+      });
     }
   }
 
@@ -40,14 +46,8 @@ export default class Instructions extends React.Component {
   render() {
     return (
       <View>
-        <Text style={styles.instructionText}>{this.state.instruction}</Text>
+        <Text style={{ color: this.state.textColor }}>{this.state.instruction}</Text>
       </View>
     );
   } 
 }
-
-const styles = StyleSheet.create({
-  instructionText: {
-    color: "white",
-  },
-});
