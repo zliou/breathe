@@ -101,7 +101,7 @@ export default class BreathingShape extends React.Component {
     );
   }
 
-  testTheme = () => {
+  toggleTheme = () => {
     if (this.state.theme == "dark") {
       this.setState({
         theme: "light",
@@ -144,11 +144,6 @@ export default class BreathingShape extends React.Component {
               color="#eeeeee"
               onPress={this.toggleI18nModal}
               title=" &#127760;  "/>
-          <Button
-              accessibilityLabel="Update color theme"
-              color="#eeeeee"
-              onPress={this.testTheme}
-              title="Theme"/>
         </View>
         { this.state.i18nModalVisible &&
           <View style={styles.i18nModal}>
@@ -157,6 +152,19 @@ export default class BreathingShape extends React.Component {
                 onPress={this.toggleI18nModal}>
               <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
+            <Button
+                color="red"/>
+            <Button
+                color="yellow"/>
+            <Button
+                color={COLOR_GREEN}/>
+            <Button
+                color="blue"/>
+            <Button
+                accessibilityLabel="Update color theme"
+                color={this.state.theme == "dark" ? "#222222" : "#eeeeee"}
+                onPress={this.toggleTheme}
+                title={this.state.theme == "dark" ? "Use light theme" : "Use dark theme"}/>
             {this.renderI18nButton()}
           </View>
         }
