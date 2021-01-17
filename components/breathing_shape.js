@@ -15,7 +15,10 @@ const HOLD_OUT_DURATION_MS = 4000;
 const INHALED_SIZE = 260;
 const EXHALED_SIZE = 50;
 
+const COLOR_RED = "#b00020";
+const COLOR_YELLOW = "#fbc02d";
 const COLOR_GREEN = "#86c06c";
+const COLOR_BLUE = "#039be5";
 
 export default class BreathingShape extends React.Component {
   state = {
@@ -26,6 +29,7 @@ export default class BreathingShape extends React.Component {
     // Default settings below.
     hl: "en",
     theme: "dark",
+    color: COLOR_GREEN,
   }
 
   constructor() {
@@ -89,7 +93,7 @@ export default class BreathingShape extends React.Component {
           <View key={hl} style={styles.languageButtonContainer}>
             <Button
                 key={hl_map[hl]}
-                color={COLOR_GREEN}
+                color={this.state.color}
                 title={hl_map[hl]}
                 onPress={() => this.setLanguage(hl)}/>
           </View>
@@ -103,14 +107,14 @@ export default class BreathingShape extends React.Component {
 
   toggleTheme = () => {
     if (this.state.theme == "dark") {
-      this.setState({
-        theme: "light",
-      });
+      this.setState({ theme: "light" });
     } else {  // Default to dark theme.
-      this.setState({
-        theme: "dark",
-      });
+      this.setState({ theme: "dark" });
     }
+  }
+  
+  changeColor = (newColor) => {
+    this.setState({ color: newColor });
   }
 
   render() {
@@ -124,6 +128,8 @@ export default class BreathingShape extends React.Component {
           <Animated.View
             style={[
               styles.breathingSquare, {
+                backgroundColor: this.state.color,
+              }, {
                 height: this.state.resizeAnim,
                 width: this.state.resizeAnim,
                 transform: [{ rotate: spin }],
@@ -152,19 +158,33 @@ export default class BreathingShape extends React.Component {
                 onPress={this.toggleI18nModal}>
               <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
-            <Button
-                color="red"/>
-            <Button
-                color="yellow"/>
-            <Button
-                color={COLOR_GREEN}/>
-            <Button
-                color="blue"/>
+            <View style={styles.colorButtonRow}>
+              <TouchableHighlight
+                  onPress={() => this.changeColor(COLOR_RED)}
+                  style={[styles.colorSelectButton, styles.red]}>
+                <View/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                  onPress={() => this.changeColor(COLOR_YELLOW)}
+                  style={[styles.colorSelectButton, styles.yellow]}>
+                <View/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                  onPress={() => this.changeColor(COLOR_GREEN)}
+                  style={[styles.colorSelectButton, styles.green]}>
+                <View/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                  onPress={() => this.changeColor(COLOR_BLUE)}
+                  style={[styles.colorSelectButton, styles.blue]}>
+                <View/>
+              </TouchableHighlight>
+            </View>
             <Button
                 accessibilityLabel="Update color theme"
                 color={this.state.theme == "dark" ? "#222222" : "#eeeeee"}
                 onPress={this.toggleTheme}
-                title={this.state.theme == "dark" ? "Use light theme" : "Use dark theme"}/>
+                title="&#9728;&#65039;  / &#127769;"/>
             {this.renderI18nButton()}
           </View>
         }
@@ -175,7 +195,6 @@ export default class BreathingShape extends React.Component {
 
 const styles = StyleSheet.create({
   breathingSquare: {
-    backgroundColor: COLOR_GREEN,
     borderRadius: 15,
     justifyContent: "center",
     paddingVertical: 8,
@@ -197,6 +216,28 @@ const styles = StyleSheet.create({
   closeI18nModalText: {
     color: "white",
     fontSize: 30,
+  },
+  colorButtonRow: {
+    flexDirection: "row",
+    paddingVertical: 5,
+  },
+  colorSelectButton: {
+    borderRadius: 5,
+    height: 80,
+    margin: 5,
+    width: 80,
+  },
+  red: {
+    backgroundColor: COLOR_RED,
+  },
+  yellow: {
+    backgroundColor: COLOR_YELLOW,
+  },
+  green: {
+    backgroundColor: COLOR_GREEN,
+  },
+  blue: {
+    backgroundColor: COLOR_BLUE,
   },
   container: {
     flex: 1,
