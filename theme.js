@@ -7,7 +7,7 @@ export const DARK_THEME_BACKGROUND = "#121212";
 export const DARK_THEME_CIRCLE = "#333333";
 
 export const LIGHT_THEME_BACKGROUND = "#dddddd";
-export const LIGHT_THEME_CIRCLE = "#cccccc";
+export const LIGHT_THEME_CIRCLE = "#f5f5f5";
 
 export function setBackground(theme) {
   let background = {

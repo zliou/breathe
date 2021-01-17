@@ -19,6 +19,12 @@ const COLOR_RED = "#b00020";
 const COLOR_YELLOW = "#fbc02d";
 const COLOR_GREEN = "#86c06c";
 const COLOR_BLUE = "#039be5";
+const COLOR_PURPLE = "#9575cd";
+const COLOR_LIGHT_RED = "#ffcdd2";
+const COLOR_LIGHT_YELLOW = "#fff9c4";
+const COLOR_LIGHT_GREEN = "#dcedc8";
+const COLOR_LIGHT_BLUE = "#bbdefb";
+const COLOR_LIGHT_PURPLE = "#d1c4e9";
 
 export default class BreathingShape extends React.Component {
   state = {
@@ -161,27 +167,61 @@ export default class BreathingShape extends React.Component {
                 onPress={this.toggleI18nModal}>
               <Text style={styles.closeI18nModalText}>✕</Text>
             </TouchableHighlight>
-            <View style={styles.colorButtonRow}>
-              <TouchableHighlight
-                  onPress={() => this.changeColor(COLOR_RED)}
-                  style={[styles.colorSelectButton, styles.red]}>
-                <View/>
-              </TouchableHighlight>
-              <TouchableHighlight
-                  onPress={() => this.changeColor(COLOR_YELLOW)}
-                  style={[styles.colorSelectButton, styles.yellow]}>
-                <View/>
-              </TouchableHighlight>
-              <TouchableHighlight
-                  onPress={() => this.changeColor(COLOR_GREEN)}
-                  style={[styles.colorSelectButton, styles.green]}>
-                <View/>
-              </TouchableHighlight>
-              <TouchableHighlight
-                  onPress={() => this.changeColor(COLOR_BLUE)}
-                  style={[styles.colorSelectButton, styles.blue]}>
-                <View/>
-              </TouchableHighlight>
+            <View style={styles.colorSelector}>
+              <View style={styles.colorButtonRow}>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_RED)}
+                    style={[styles.colorSelectButton, styles.red]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_YELLOW)}
+                    style={[styles.colorSelectButton, styles.yellow]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_GREEN)}
+                    style={[styles.colorSelectButton, styles.green]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_BLUE)}
+                    style={[styles.colorSelectButton, styles.blue]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_PURPLE)}
+                    style={[styles.colorSelectButton, styles.purple]}>
+                  <View/>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.colorButtonRow}>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_LIGHT_RED)}
+                    style={[styles.colorSelectButton, styles.lightRed]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_LIGHT_YELLOW)}
+                    style={[styles.colorSelectButton, styles.lightYellow]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_LIGHT_GREEN)}
+                    style={[styles.colorSelectButton, styles.lightGreen]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_LIGHT_BLUE)}
+                    style={[styles.colorSelectButton, styles.lightBlue]}>
+                  <View/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => this.changeColor(COLOR_LIGHT_PURPLE)}
+                    style={[styles.colorSelectButton, styles.lightPurple]}>
+                  <View/>
+                </TouchableHighlight>
+              </View>
             </View>
             <Button
                 accessibilityLabel="Update color theme"
@@ -221,14 +261,18 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   colorButtonRow: {
+    alignItems: "center",
+    justifyContent: "center",
     flexDirection: "row",
-    paddingVertical: 5,
   },
   colorSelectButton: {
     borderRadius: 5,
-    height: 80,
-    margin: 5,
-    width: 80,
+    margin: "1vw",
+    height: "18vw",
+    width: "17vw",
+  },
+  colorSelector: {
+    marginVertical: 5,
   },
   red: {
     backgroundColor: COLOR_RED,
@@ -241,6 +285,24 @@ const styles = StyleSheet.create({
   },
   blue: {
     backgroundColor: COLOR_BLUE,
+  },
+  purple: {
+    backgroundColor: COLOR_PURPLE,
+  },
+  lightRed: {
+    backgroundColor: COLOR_LIGHT_RED,
+  },
+  lightYellow: {
+    backgroundColor: COLOR_LIGHT_YELLOW,
+  },
+  lightGreen: {
+    backgroundColor: COLOR_LIGHT_GREEN,
+  },
+  lightBlue: {
+    backgroundColor: COLOR_LIGHT_BLUE,
+  },
+  lightPurple: {
+    backgroundColor: COLOR_LIGHT_PURPLE,
   },
   container: {
     flex: 1,
