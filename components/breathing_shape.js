@@ -145,11 +145,14 @@ export default class BreathingShape extends React.Component {
               textColor={theme.setInstructionsTextColor(this.state.theme)}/>
         </View>
         <View style={styles.buttonRow}>
-          <Button
-              accessibilityLabel="Select language"
-              color="#eeeeee"
-              onPress={this.toggleI18nModal}
-              title=" &#127760;  "/>
+          <TouchableHighlight
+              accessibilityLabel="Settings"
+              style={[styles.settingsButton, {
+                  backgroundColor: this.state.theme == "dark" ? "#333333" : "#eeeeee",
+              }]}
+              onPress={this.toggleI18nModal}>
+              <Text>&#8942;</Text>
+          </TouchableHighlight>
         </View>
         { this.state.i18nModalVisible &&
           <View style={styles.i18nModal}>
@@ -264,5 +267,12 @@ const styles = StyleSheet.create({
   },
   languageButtonContainer: {
     paddingTop: 10,
+  },
+  settingsButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 18,
+    height: 36,
+    width: 36,
   },
 });
