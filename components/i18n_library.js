@@ -26,7 +26,7 @@ export default class I18nLibrary {
       "es": "Español",
       "fr": "Français",
       "pt": "Português",
-      "zh": "中文(繁體)",
+      "zh": "中文",
     },
     languageList: ["en", "es", "fr", "pt", "zh"],
   };

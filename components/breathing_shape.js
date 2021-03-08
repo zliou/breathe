@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Linking from 'expo-linking';
 import { Animated, Button, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import Count from './count.js';
@@ -109,6 +110,10 @@ export default class BreathingShape extends React.Component {
     return (
       <View>{ buttons }</View>
     );
+  }
+
+  openDonateLink = () => {
+    Linking.openURL("https://www.paypal.com/donate?business=W5ENGU2EYTHU6&item_name=Thanks+for+checking+out+my+breathing+app%21+If+you+find+it+useful%2C+please+consider+a+small+donation+%3A%29&currency_code=USD");
   }
 
   toggleTheme = () => {
@@ -223,12 +228,19 @@ export default class BreathingShape extends React.Component {
                 </TouchableHighlight>
               </View>
             </View>
-            <Button
-                accessibilityLabel="Update color theme"
-                color={this.state.theme == "dark" ? "#222222" : "#eeeeee"}
-                onPress={this.toggleTheme}
-                title="&#9728;&#65039;  / &#127769;"/>
-            {this.renderI18nButton()}
+            <View style={styles.buttonColumnContainer}>
+              <Button
+                  accessibilityLabel="Update color theme"
+                  color={this.state.theme == "dark" ? "#222222" : "#eeeeee"}
+                  onPress={this.toggleTheme}
+                  title="&#9728;&#65039;  / &#127769;"/>
+              {this.renderI18nButton()}
+            </View>
+            <TouchableHighlight
+                style={styles.donateButton}
+                onPress={this.openDonateLink}>
+              <Text>❤️</Text>
+            </TouchableHighlight>
           </View>
         }
       </View>
@@ -247,6 +259,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     margin: 10,
+  },
+  buttonColumnContainer: {
+    width: 274,
   },
   buttonRow: {
     flexDirection: "row",
@@ -267,9 +282,9 @@ const styles = StyleSheet.create({
   },
   colorSelectButton: {
     borderRadius: 5,
-    margin: "1vw",
-    height: "18vw",
-    width: "17vw",
+    margin: 3,
+    height: 50,
+    width: 50,
   },
   colorSelector: {
     marginVertical: 5,
@@ -312,8 +327,14 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#121212",
   },
+  donateButton: {
+    height: 20,
+    marginTop: 15,
+    width: 20,
+  },
   i18nModal: {
     ...StyleSheet.absoluteFillObject,
+    alignItems: "center",
     top: 100,
     left: 0,
     right: 0,
