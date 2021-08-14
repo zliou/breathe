@@ -237,28 +237,27 @@ export default class BreathingShape extends React.Component {
               <Button
                   title="3"
                   color={this.state.color}
-                  onPress={() => this.setDurationTo(3000)}
-                  />
+                  onPress={() => this.setDurationTo(3000)} />
               <Button
                   title="4"
                   color={this.state.color}
-                  onPress={() => this.setDurationTo(4000)}
-                  />
+                  onPress={() => this.setDurationTo(4000)} />
               <Button
                   title="5"
                   color={this.state.color}
-                  onPress={() => this.setDurationTo(5000)}
-                  />
+                  onPress={() => this.setDurationTo(5000)} />
               <Button
                   title="6"
                   color={this.state.color}
-                  onPress={() => this.setDurationTo(6000)}
-                  />
+                  onPress={() => this.setDurationTo(6000)} />
               <Button
                   title="7"
                   color={this.state.color}
-                  onPress={() => this.setDurationTo(7000)}
-                  />
+                  onPress={() => this.setDurationTo(7000)} />
+              <Button
+                  title="8"
+                  color={this.state.color}
+                  onPress={() => this.setDurationTo(8000)} />
             </View>
             <View style={styles.buttonColumnContainer}>
               <Button
