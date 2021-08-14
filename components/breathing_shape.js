@@ -8,10 +8,7 @@ import I18nLibrary from './i18n_library.js';
 
 import * as theme from '../theme.js';
 
-const INHALE_DURATION_MS = 4000;
-const HOLD_IN_DURATION_MS = 4000;
-const EXHALE_DURATION_MS = 4000;
-const HOLD_OUT_DURATION_MS = 4000;
+const DEFAULT_DURATION_MS = 4000;
 
 const INHALED_SIZE = 260;
 const EXHALED_SIZE = 50;
@@ -32,6 +29,7 @@ export default class BreathingShape extends React.Component {
     i18nModalVisible: false,
     resizeAnim: new Animated.Value(EXHALED_SIZE),
     rotation: new Animated.Value(0),
+    duration: DEFAULT_DURATION_MS,
 
     // Default settings below.
     hl: "en",
@@ -41,43 +39,42 @@ export default class BreathingShape extends React.Component {
 
   constructor() {
     super();
-    // Start the animation.
-    this.growNoDelay();
+    this.growNoDelay();  // Start the animation.
   }
 
   grow = () => {
     this.setState({instruction: "inhale"});
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
-      duration: INHALE_DURATION_MS,
+      duration: this.state.duration,
     }).start(this.holdInhaled);
   };
   shrink = () => {
     this.setState({instruction: "exhale"});
     Animated.timing(this.state.resizeAnim, {
       toValue: EXHALED_SIZE,
-      duration: EXHALE_DURATION_MS,
+      duration: this.state.duration,
     }).start(this.holdExhaled);
   };
   holdExhaled = () => {
     this.setState({instruction: "hold"});
     Animated.timing(this.state.rotation, {
       toValue: 0,
-      duration: EXHALE_DURATION_MS,
+      duration: this.state.duration,
     }).start(this.grow);
   };
   holdInhaled = () => {
     this.setState({instruction: "hold"});
     Animated.timing(this.state.rotation, {
       toValue: 1,
-      duration: EXHALE_DURATION_MS,
+      duration: this.state.duration,
     }).start(this.shrink);
   };
   growNoDelay = () => {
     this.state.instruction = "inhale";
     Animated.timing(this.state.resizeAnim, {
       toValue: INHALED_SIZE,
-      duration: INHALE_DURATION_MS,
+      duration: DEFAULT_DURATION_MS,
     }).start(this.holdInhaled);
   };
 
@@ -126,6 +123,10 @@ export default class BreathingShape extends React.Component {
   
   changeColor = (newColor) => {
     this.setState({ color: newColor });
+  }
+
+  setDurationTo = (milliseconds) => {
+    this.setState({ duration: milliseconds });
   }
 
   render() {
@@ -227,6 +228,37 @@ export default class BreathingShape extends React.Component {
                   <View/>
                 </TouchableHighlight>
               </View>
+            </View>
+            <View style={styles.speedButtonRow}>
+              <Button
+                  title="Speed"
+                  color="#222222"
+                  onPress={() => {this.setDurationTo(DEFAULT_DURATION_MS)}}/>
+              <Button
+                  title="3"
+                  color={this.state.color}
+                  onPress={() => this.setDurationTo(3000)}
+                  />
+              <Button
+                  title="4"
+                  color={this.state.color}
+                  onPress={() => this.setDurationTo(4000)}
+                  />
+              <Button
+                  title="5"
+                  color={this.state.color}
+                  onPress={() => this.setDurationTo(5000)}
+                  />
+              <Button
+                  title="6"
+                  color={this.state.color}
+                  onPress={() => this.setDurationTo(6000)}
+                  />
+              <Button
+                  title="7"
+                  color={this.state.color}
+                  onPress={() => this.setDurationTo(7000)}
+                  />
             </View>
             <View style={styles.buttonColumnContainer}>
               <Button
@@ -357,5 +389,9 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     height: 36,
     width: 36,
+  },
+  speedButtonRow: {
+    flexDirection: "row",
+    paddingBottom: 7,
   },
 });
