@@ -17,11 +17,11 @@
     "android": {
       "package": "com.zachliou.breathe",
       "permissions": [],
-      "versionCode": 3
+      "versionCode": 4
     },
     "ios": {
       "bundleIdentifier": "com.zachliou.breathebox",
-      "buildNumber": "1.0.1",
+      "buildNumber": "1.1.0",
       "supportsTablet": true
     },
     "web": {
