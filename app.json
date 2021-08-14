@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "breathe",
+    "name": "breathebox",
     "slug": "breathe",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,11 +16,12 @@
     ],
     "android": {
       "package": "com.zachliou.breathe",
-      "versionCode": 1
+      "permissions": [],
+      "versionCode": 3
     },
     "ios": {
-      "bundleIdentifier": "com.zachliou.breathe",
-      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.zachliou.breathebox",
+      "buildNumber": "1.0.1",
       "supportsTablet": true
     },
     "web": {
